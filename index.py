@@ -3,7 +3,10 @@ import time
 from flask import Flask, request, jsonify
 from providers import PROVIDERS
 
+from flask_frozen import Freezer
+
 app = Flask(__name__)
+freezer = Freezer(app)
 
 def send_sms_via_email(
     number: str,
@@ -24,26 +27,25 @@ def send_sms_via_email(
     ) as email:
         email.login(sender_email, email_password)
         email.sendmail(sender_email, receiver_email, email_message)
-        
 
-@app.route("/main/<string:number>/<string:email>/<string:password>")
-def main(number,email,password):
-    number = number
-    email = email
-    password = password
+#@app.route("/main/<string:number>/<string:email>/<string:password>")
+def main():
+    #number = 'number'
+    #email = 'email'
+    #password = 'password'
 
-    message = "Yo What's Up!"
-    provider = "Verizon"
+    #message = "Yo What's Up!"
+    #provider = "Verizon"
 
-    sender_credentials = (email, password)
+    #sender_credentials = (email, password)
 
     #time.sleep(10)
 
-    send_sms_via_email(number, message, provider, sender_credentials)
+    #send_sms_via_email(number, message, provider, sender_credentials)
 
     return "sent"
 
 
 if __name__ == "__main__":
     app.run(debug=True)
-    main()
+    #main()
